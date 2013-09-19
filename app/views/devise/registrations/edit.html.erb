@@ -1,0 +1,59 @@
+<div class="bs-docs-section">
+  <div class="row">
+    <div class="col-lg-offset-3 col-lg-6">
+      <div class="well">
+        <h2>Профиль <%= current_user.nickname %> <%= link_to "Удалить мой профиль", registration_path(resource_name), :class => "btn btn-danger btn-xs", :data => { :confirm => "Are you sure?" }, :method => :delete %></h2>
+        <%= image_tag current_user.avatar.url %>
+        <br>
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal", :role => "form", :multipart => true }) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="form-group">
+            <label for="inputEmail1" class="col-lg-2 control-label"><%= f.label :email %></label>
+            <div class="col-lg-10">
+              <%= f.email_field :email, :autofocus => true, :type => "email", :class => "form-control", :id => "inputEmail1", :placeholder => "Ваш адрес электронной почты"%>
+            </div>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="form-group">
+            <label for="inputText" class="col-lg-2 control-label"><%= f.label :nickname %></label>
+            <div class="col-lg-10">
+              <%= f.text_field :nickname, :type => "text", :class => "form-control", :placeholder => "Ваше имя на сайте"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputFile" class="col-lg-2 control-label">File input</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">Example block-level help text here.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword1" class="col-lg-2 control-label"><%= f.label :password %></label>
+            <div class="col-lg-10">
+              <%= f.password_field :password, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Ваш пароль"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword1" class="col-lg-2 control-label"><%= f.label :password_confirmation %></label>
+            <div class="col-lg-10">
+              <%= f.password_field :password_confirmation, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Потвердите ваш пароль"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-offset-9 col-lg-10">
+              <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
+            </div>
+          </div>
+        <% end %>
+        <p><%= link_to "Назад", :back, :class => "btn btn-primary btn-xs" %></p>
+      </div>
+    </div>
+  </div>
+</div>
