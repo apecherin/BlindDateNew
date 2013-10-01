@@ -7,21 +7,30 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :nickname, :password, :password_confirmation, :remember_me, :avatar
+  attr_accessible :email, :nickname, :current_password, :password,
+                  :password_confirmation, :remember_me, :avatar,
+                  :age, :sex, :description
 
-  has_mongoid_attached_file :avatar
+  has_mongoid_attached_file :avatar,
+    :styles => {
+      :original => ['1920x1680>', :jpg],
+      :small    => ['65x65#',   :jpg],
+      :medium   => ['250x250',    :jpg],
+      :large    => ['500x500>',   :jpg]
+    }, :convert_options => { :all => '-background white -flatten +matte' }
 
-  validates :nickname, presence: true
-
-  def custom_label_method
-    "#{self.nickname}"
-  end
+  validates :email, presence: true
+  validates :description, length: { maximum: 3500 }
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :nickname,              :type => String, :default => ""
   field :avatar,              :type => String, :default => ""
+  field :age,              :type => String, :default => ""
+  field :sex,              :type => String, :default => ""
+  field :description,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
+  field :current_password, :type => String, :default => ""
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -37,17 +46,7 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
-  ## Confirmable
-  # field :confirmation_token,   :type => String
-  # field :confirmed_at,         :type => Time
-  # field :confirmation_sent_at, :type => Time
-  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
-  ## Lockable
-  # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
-  # field :locked_at,       :type => Time
-
-  ## Token authenticatable
-  # field :authentication_token, :type => String
+  has_many :recieved_messages, :class_name => 'Message', :inverse_of => :to_user, :foreign_key => :user_to
+  has_many :sent_messages, :class_name => 'Message', :inverse_of => :from_user, :foreign_key => :user_from
 end

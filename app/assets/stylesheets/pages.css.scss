@@ -46,7 +46,11 @@ body {
   background-color:#FAFAFA;
 }
 
-.container {
+.container .well {
   margin-top: 7%;
-  border-radius: 5px;
+  border-radius: 20px;
+}
+
+.pass_change {
+  display: none;
 }

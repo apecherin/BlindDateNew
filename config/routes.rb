@@ -4,9 +4,10 @@ BlindDateNew::Application.routes.draw do
 
   match '/index', :to => 'pages#index'
 
-  resources :posts
+  resources :messages
 
   root :to => 'pages#index'
+  #match "/users/index", :to => 'pages#index'
 
   get "chats/room"
   get  '/chatroom' => 'chats#room', :as => :chat

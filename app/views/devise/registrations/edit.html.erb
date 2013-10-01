@@ -3,14 +3,13 @@
     <div class="col-lg-offset-3 col-lg-6">
       <div class="well">
         <h2>Профиль <%= current_user.nickname %> <%= link_to "Удалить мой профиль", registration_path(resource_name), :class => "btn btn-danger btn-xs", :data => { :confirm => "Are you sure?" }, :method => :delete %></h2>
-        <%= image_tag current_user.avatar.url %>
         <br>
         <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal", :role => "form", :multipart => true }) do |f| %>
           <%= devise_error_messages! %>
 
           <div class="form-group">
             <label for="inputEmail1" class="col-lg-2 control-label"><%= f.label :email %></label>
-            <div class="col-lg-10">
+            <div class="col-lg-8">
               <%= f.email_field :email, :autofocus => true, :type => "email", :class => "form-control", :id => "inputEmail1", :placeholder => "Ваш адрес электронной почты"%>
             </div>
           </div>
@@ -20,35 +19,76 @@
           <% end %>
 
           <div class="form-group">
-            <label for="inputText" class="col-lg-2 control-label"><%= f.label :nickname %></label>
-            <div class="col-lg-10">
+            <label for="inputText" class="col-lg-2 control-label">Имя</label>
+            <div class="col-lg-8">
               <%= f.text_field :nickname, :type => "text", :class => "form-control", :placeholder => "Ваше имя на сайте"%>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="exampleInputFile" class="col-lg-2 control-label">File input</label>
-            <input type="file" id="exampleInputFile">
-            <p class="help-block">Example block-level help text here.</p>
-          </div>
-
-          <div class="form-group">
-            <label for="inputPassword1" class="col-lg-2 control-label"><%= f.label :password %></label>
-            <div class="col-lg-10">
-              <%= f.password_field :password, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Ваш пароль"%>
+            <label class="col-lg-2 control-label">Ваш пол</label>
+            <div class="col-lg-8">
+              <div class="radio">
+                <label>
+                  <%= f.radio_button :sex, 'женский', :checked => true, :html =>{:type=>"radio", :name=>"optionsRadios", :id=>"optionsRadios1"} %>
+                  женский
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <%= f.radio_button :sex, 'мужской', :checked => false, :html =>{:type=>"radio", :name=>"optionsRadios", :id=>"optionsRadios2"} %>
+                  мужской
+                </label>
+              </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="inputPassword1" class="col-lg-2 control-label"><%= f.label :password_confirmation %></label>
-            <div class="col-lg-10">
-              <%= f.password_field :password_confirmation, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Потвердите ваш пароль"%>
+            <label class="col-lg-2 control-label">О себе</label>
+            <div class="col-lg-8" id="profile">
+              <%= f.text_area :description, :placeholder => "Напишите немного о себе", :rows=>"4", :class=>"form-control"%>
             </div>
           </div>
 
           <div class="form-group">
-            <div class="col-lg-offset-9 col-lg-10">
-              <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
+            <label class="col-lg-2 control-label">Возраст</label>
+            <div class="col-lg-8" id="profile">
+              <%= f.text_field :age, :placeholder => "Полных лет", :class=>"form-control"%>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputFile" class="col-lg-2 control-label">Аватар</label>
+            <div class="col-lg-8">
+              <%= f.text_field :avatar, :type => "file", :class => "form-control", :id => "exampleInputFile", :placeholder => "Ваше имя на сайте"%>
+            </div>
+            <%= image_tag current_user.avatar.url(:small) %>
+          </div>
+
+          <div class="form-group">
+            <label for="inputPassword1" class="col-lg-2 control-label">Текущий пароль</label>
+            <div class="col-lg-8">
+              <%= f.password_field :current_password, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Ваш пароль"%>
+            </div>
+          </div>
+          <div class="pass_change">
+            <div class="form-group">
+              <label for="inputPassword1" class="col-lg-2 control-label">Новый пароль</label>
+              <div class="col-lg-8">
+                <%= f.password_field :password, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Ваш пароль"%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputPassword1" class="col-lg-2 control-label">Повтор нового пароль</label>
+              <div class="col-lg-8">
+                <%= f.password_field :password_confirmation, :type => "password", :class => "form-control", :id => "inputPassword1", :placeholder => "Потвердите ваш пароль"%>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-offset-9 col-lg-9">
+              <div><%= f.submit "Update", :class => "btn btn-success" %></div>
             </div>
           </div>
         <% end %>

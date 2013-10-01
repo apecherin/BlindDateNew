@@ -1,6 +1,7 @@
+#encoding: utf-8
 BlindDateNew::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-
+  Time::DATE_FORMATS[:my_datetime] = "%d.%m.%Y в %k:%M:%S"
   # Code is not reloaded between requests
   config.cache_classes = true
 
