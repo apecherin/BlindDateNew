@@ -1,12 +1,39 @@
-%p#notice= notice
-
-%p
-  %b Message:
-  = @message.message
-%p
-  %b User to:
-  = @message.user_to
-
-= link_to 'Edit', edit_message_path(@message)
-\|
-= link_to 'Back', messages_path
+:javascript
+  avatar = '#{image_tag current_user.avatar.url(:small)}';
+  nickname = '#{current_user.nickname}';
+  user_id = '#{current_user.id}';
+  cur_time = '#{l Time.now, format: :my}';
+.bs-docs-section
+  .row
+    .col-lg-12
+      .well
+        .chat_container
+          .well
+            #chat_room_private
+              #messages
+                %table.table
+                  %tbody
+                    - @messages.each do |message|
+                      - @partner = message.user_to != current_user.id ?  message.to_user : message.from_user
+                      %tr
+                        %td
+                          #img
+                            = image_tag message.from_user.avatar.url(:small)
+                        %td
+                          #nickname
+                            = link_to "#{message.from_user.nickname}", page_path(message.from_user)
+                          #date
+                            = l message.created_at, format: :my
+                        %td
+                          #text
+                            = message.message
+          %p
+            = link_to 'Назад', messages_path, :class => "btn btn-primary btn-xs"
+          %form#new_message_form_private.form-inline{role: "form"}
+            .col-lg-6
+              %input#user_to{:type => "hidden", :value => @partner.id}
+              %input#user_from{:type => "hidden", :value => current_user.id}
+              %textarea#message.form-control{placeholder: "Твое сообщение",rows: "4"}
+            %br/
+            %br/
+            %button#send.btn.btn-success.btn-lg{type: "submit"} Отправить

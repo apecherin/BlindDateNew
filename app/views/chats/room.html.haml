@@ -13,11 +13,10 @@
     });
 
     var private_subscription = client.subscribe('/messages/private/#{current_user.nickname}', function(data) {
-      $('<p></p>').addClass('private').html(data.username + ": " + data.msg).appendTo('#chat_room');
+      $('<p></p>').html(data.username + ": " + data.msg).appendTo('#chat_room');
     });
 
     $('#new_message_form').submit(function(){
-      // Is it a private message?
       if (matches = $('#message').val().match(/@(.+) (.+)/)) {
         client.publish('/messages/private/' + matches[1], {
           username: '#{current_user.nickname}',

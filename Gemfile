@@ -21,6 +21,7 @@ end
 gem 'jquery-rails'
 gem 'rails-backbone'
 gem 'haml-rails'
+gem 'fancybox-rails'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'devise'

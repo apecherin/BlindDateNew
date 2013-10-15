@@ -1,6 +1,6 @@
 .bs-docs-section
   .row
-    .col-lg-12
+    .col-lg-offset-1.col-lg-10
       .well
         #messages
           = link_to 'New', new_message_path
@@ -11,16 +11,17 @@
                 - @messages.each do |message|
                   - if message.user_to == user or message.user_from == user
                     - i=1
+                    - partner = message.user_to == user ?  message.to_user : message.from_user
                     %tr
                       %td
-                        = image_tag message.user_to == user ?  message.to_user.avatar.url(:small) : message.from_user.avatar.url(:small)
-                        = message.user_to == user ?  message.to_user.nickname : message.from_user.nickname
-                        = message.created_at.to_s(:my_datetime)
+                        #img
+                          = image_tag partner.avatar.url(:small)
                       %td
-                        = message.message
+                        #nickname
+                          = link_to "#{partner.nickname}", page_path(partner)
+                        #date
+                          = l message.created_at, format: :my
+                      %td.mess{'href' => "/messages/#{partner.id}"}
+                        #text
+                          = message.message
                   - break if i==1
-:javascript
-  /*$(function() {
-    window.router = new BlindDateNew.Routers.MessagesRouter({messages: #{@messages.to_json.html_safe}});
-    Backbone.history.start();
-  });*/

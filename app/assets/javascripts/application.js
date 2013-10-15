@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require fancybox
 //= require twitter/bootstrap
 //= require underscore
+//= require messages
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink

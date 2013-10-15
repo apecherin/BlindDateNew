@@ -18,8 +18,7 @@ class MessagesController < ApplicationController
     end
   end
   def show
-    @message = Message.find(params[:id])
-
+    @messages = Message.or({user_to: params[:id], user_from: current_user.id}).or({user_to: current_user.id, user_from: params[:id]}).order_by
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @message }
@@ -72,5 +71,19 @@ class MessagesController < ApplicationController
       format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
+  end
+
+  def getDialog
+    messages = Message.or({user_to: params[:id], user_from: current_user.id}).or({user_to: current_user.id, user_from: params[:id]}).order_by
+    render :json => { :messages => messages }
+  end
+
+  def addMessage
+    status = false
+    if current_user
+      @message = Message.new params[:message]
+      status = @message.save
+    end
+    render :json => {success: status}
   end
 end

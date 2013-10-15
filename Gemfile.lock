@@ -76,6 +76,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.1)
+    fancybox-rails (0.2.1)
+      railties (>= 3.1.0)
     faye (0.8.9)
       cookiejar (>= 0.3.0)
       em-http-request (>= 0.3.0)
@@ -200,6 +202,7 @@ DEPENDENCIES
   bson_ext
   coffee-rails (~> 3.2.1)
   devise
+  fancybox-rails
   faye
   haml-rails
   jquery-rails

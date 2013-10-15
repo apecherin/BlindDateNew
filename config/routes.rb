@@ -11,4 +11,8 @@ BlindDateNew::Application.routes.draw do
 
   get "chats/room"
   get  '/chatroom' => 'chats#room', :as => :chat
+
+  resources :pages do
+  end
+  match '/messages/addMessage'
 end
