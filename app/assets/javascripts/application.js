@@ -16,8 +16,12 @@
 //= require twitter/bootstrap
 //= require underscore
 //= require messages
+//= require pages
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blind_date_new
+//
+//
+user_id = '#{current_user.id}';
 

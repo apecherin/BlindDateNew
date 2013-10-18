@@ -1,40 +1,7 @@
 :javascript
-  $(function() {
-    window.onload = function(){
-       var scrollinDiv = document.getElementById('chat_room');
-       setInterval(function() {
-            scrollinDiv.scrollTop = 9999;
-       }, 100);
-    }
-    var client = new Faye.Client('http://localhost:9292/faye');
-
-    var public_subscription = client.subscribe('/messages/public', function(data) {
-      $('<p></p>').html(data.username + ": " + data.msg).appendTo('#chat_room');
-    });
-
-    var private_subscription = client.subscribe('/messages/private/#{current_user.nickname}', function(data) {
-      $('<p></p>').html(data.username + ": " + data.msg).appendTo('#chat_room');
-    });
-
-    $('#new_message_form').submit(function(){
-      if (matches = $('#message').val().match(/@(.+) (.+)/)) {
-        client.publish('/messages/private/' + matches[1], {
-          username: '#{current_user.nickname}',
-          msg: matches[2]
-        });
-      }
-      else {
-        client.publish('/messages/public', {
-          username: '#{current_user.nickname}',
-          msg: $('#message').val()
-        });
-      }
-
-      $('#message').val('');
-
-      return false;
-    });
-  });
+  nickname = '#{current_user.nickname}';
+  user_id = '#{current_user.id}';
+  cur_time = '#{l Time.now, format: :my}';
 .bs-docs-section
   .row
     .col-lg-12

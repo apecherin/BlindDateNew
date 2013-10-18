@@ -8,7 +8,7 @@ class Message
     attrs
   end
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :message, :user_from, :user_to, :image
+  attr_accessible :message, :user_from, :user_to, :image, :is_read
 
   has_mongoid_attached_file :image,
                             :styles => {
@@ -23,6 +23,7 @@ class Message
   field :user_from, :type => String, :default => 0
   field :user_to,   :type => String, :default => 0
   field :image,     :type => String, :default => ""
+  field :is_read,   :type => Boolean, :default => false
 
 
   belongs_to :to_user, :class_name => 'User', :inverse_of => :recieved_messages, :foreign_key => :user_to

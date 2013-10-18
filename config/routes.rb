@@ -15,4 +15,5 @@ BlindDateNew::Application.routes.draw do
   resources :pages do
   end
   match '/messages/addMessage'
+  match '/messages/countMessage'
 end
