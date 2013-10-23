@@ -1,8 +1,3 @@
-:javascript
-  avatar = '#{image_tag current_user.avatar.url(:small)}';
-  nickname = '#{current_user.nickname}';
-  user_id = '#{current_user.id}';
-  cur_time = '#{l Time.now, format: :my}';
 .bs-docs-section
   .row
     .col-lg-12
@@ -14,9 +9,8 @@
                 %table.table
                   %tbody
                     - @messages.each do |message|
-                      - @partner = message.user_to != current_user.id ?  message.to_user : message.from_user
                       %tr
-                        %td
+                        %td.avat
                           #img
                             = image_tag message.from_user.avatar.url(:small)
                         %td
@@ -24,14 +18,13 @@
                             = link_to "#{message.from_user.nickname}", page_path(message.from_user)
                           #date
                             = l message.created_at, format: :my
-                        %td
-                          #text
-                            = message.message
+                        %td#text_mess
+                          = message.message
           %p
             = link_to 'Назад', messages_path, :class => "btn btn-primary btn-xs"
           %form#new_message_form_private.form-inline{role: "form"}
             .col-lg-6
-              %input#user_to{:type => "hidden", :value => @partner.id}
+              %input#user_to{:type => "hidden", :value => @partner_id}
               %input#user_from{:type => "hidden", :value => current_user.id}
               %textarea#message.form-control{placeholder: "Твое сообщение",rows: "4"}
             %br/

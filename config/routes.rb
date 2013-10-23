@@ -16,4 +16,5 @@ BlindDateNew::Application.routes.draw do
   end
   match '/messages/addMessage'
   match '/messages/countMessage'
+  match '/messages/readMessage'
 end

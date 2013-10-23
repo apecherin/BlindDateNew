@@ -24,9 +24,10 @@ class MessagesController < ApplicationController
     @messages.each do |message|
       message.update_attributes(is_read: true) if !message.is_read && message.user_to == current_user.id
     end
+    @partner_id = params[:id]
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @message }
+      format.json { render :json => { :messages=> @messages, :partner_id => @partner_id } }
     end
   end
 
@@ -85,14 +86,20 @@ class MessagesController < ApplicationController
   def addMessage
     status = false
     if current_user
-      @message = Message.new params[:message]
-      status = @message.save
+      message = Message.new params[:message]
+      status = message.save
     end
-    render :json => {success: status}
+    render :json => { :success => status, :mess_id => message.id }
   end
 
   def countMessage
     new_messages = Message.and({user_to: current_user.id}, {is_read: false}).count()
     render :json => { :count => new_messages }
+  end
+
+  def readMessage
+    message = Message.find(params[:id])
+    status = message.update_attributes(is_read: true)
+    render :json => { :success => status }
   end
 end

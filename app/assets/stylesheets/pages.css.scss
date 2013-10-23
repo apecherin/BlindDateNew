@@ -70,3 +70,42 @@ body {
   border:#999 1px solid;
   background-color:#FAFAFA;
 }
+#messages_link {
+  padding: 1px 5px !important;
+  margin-top: 14px;
+}
+#is_read{
+  background-color: #E6E6E6;
+  padding-left: 12;
+  height: 65px;
+}
+.nickdate{
+  width: 25%;
+}
+.avat{
+  width: 9%;
+}
+#text {
+  word-wrap: break-word;
+  height: 63px;
+  /*width: 60%;*/
+  font-size: 11px;
+  overflow: hidden;
+}
+#text_mess {
+  word-wrap: break-word;
+  height: auto;
+  font-size: 12px;
+  overflow: hidden;
+}
+.table{
+  table-layout: fixed;
+}
+#usr_ava_from{
+  width: 40px;
+  padding: 7px 45px 0 0;
+}
+#button_sign{
+  padding: 1px 5px !important;
+  margin-top: 7px;
+}

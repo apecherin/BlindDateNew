@@ -30,7 +30,7 @@ gem 'less-rails'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
 gem 'faye'
 gem 'thin'
-gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
           # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

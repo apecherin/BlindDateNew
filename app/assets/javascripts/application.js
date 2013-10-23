@@ -21,7 +21,3 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blind_date_new
-//
-//
-user_id = '#{current_user.id}';
-

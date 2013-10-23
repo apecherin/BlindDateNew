@@ -1,23 +1,29 @@
-dialog =
+messages =
   init: ->
-    @modalInit()
+    @countMess()
+  read: ->
+    @readMess()
 
-  modalInit: ->
-    $('#messages .mess').click (e) ->
-      e.preventDefault()
-      dialog.getMessages($(@).data('id'))
-
-  getMessages: (id) ->
+  countMess: ->
     $.ajax
-      url: "/messages/getDialog"
+      url: "/messages/countMessage"
       type: "POST"
       data:
-        id: id
+        id:  user_id
       dataType: "json"
       success: (res) ->
-        $.each res.messages, (key, message) ->
-          $('#messages').append('<li>'+message.user_from.nickname+' '+message.message+' '+message.created_at+'</li>')
-        $('#myModal').modal('show')
+        $("#messages_link").html("Почта \+" + res.count) if res.count > 0
+        $("#messages_link_main").html("Почта \+" + res.count) if res.count > 0
+
+  readMess: (id) ->
+    $.ajax
+      url: "/messages/readMessage"
+      type: "POST"
+      data:
+        id:  id
+      dataType: "json"
+      success: (res) ->
+        console.log res.status
 
 dialog2 =
   init: ->
@@ -29,19 +35,22 @@ dialog2 =
 
 chat_private =
   init: ->
+    window.client = new Faye.Client("http://localhost:9292/faye")
+    @fayePrivInit()
+    do @newMessage
     if document.getElementById("chat_room_private")
-      window.client = new Faye.Client("http://localhost:9292/faye")
-      @fayePrivInit()
       @updateScroll_new()
-      do @newMessage
 
   fayePrivInit: ->
     private_subscription = client.subscribe("/messages/private/" + user_id, (data) ->
       tr = $("<tr></tr>")
       res = tr.html(data.td_img + data.td_nick_date + data.td_mess)
-      res.appendTo ".table"
-      chat_private.updateScroll_new 300
-      )
+      if document.getElementById("chat_room_private") && data.user_from == $('#user_to').val()
+        res.appendTo ".table"
+        chat_private.updateScroll_new 300
+        messages.readMess(data.mess_id)
+      messages.init()
+    )
 
   updateScroll_new: (down = 0) ->
     scrollinDiv = document.getElementById("chat_room_private")
@@ -66,14 +75,16 @@ chat_private =
           user_from: $('#user_from').val()
       success: (res) ->
         if res.success
-          td_img = "<td><div id=\"img\">" + avatar + "</div></td>"
+          td_img = "<td class=\"avat\"><div id=\"img\">" + avatar + "</div></td>"
           td_nick_date = "<td><div id=\"nickname\">" + nickname + "</div><div id=\"date\">" + cur_time + "</div></td>"
-          td_mess = "<td><div id=\"text\">" + message + "</div></td>"
+          td_mess = "<td class=\"text_mess\">" + message + "</td>"
           #push message to patner
           client.publish "/messages/private/" + $("#user_to").val(),
             td_img: td_img
             td_nick_date: td_nick_date
-            td_mess: td_mess
+            td_mess: td_mess,
+            mess_id: res.mess_id,
+            user_from: $('#user_from').val()
           tr = $("<tr></tr>")
           result = tr.html(td_img + td_nick_date + td_mess)
           #push to our win
@@ -122,3 +133,4 @@ $ ->
   dialog2.init()
   chat_private.init()
   chat.init()
+  messages.init()

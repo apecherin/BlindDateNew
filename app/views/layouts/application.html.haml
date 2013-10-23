@@ -29,7 +29,8 @@
         .collapse.navbar-collapse.navbar-ex1-collapse
           %ul.nav.navbar-nav
             %li
-              = link_to("Мой профиль", edit_user_registration_path)
+              #mess_link
+                = link_to "Почта", messages_path, :class => "btn btn-warning btn-xs", :id => "messages_link"
             %li
               = link_to "Общий чат", chat_path
             %li.dropdown
@@ -43,11 +44,14 @@
                   %a{href: "#"} Случайный собеседник
                 %li
                   %a{href: "#"} Экстримальная встреча
+            %li
+              = link_to("Мой профиль", edit_user_registration_path)
           %ul.nav.navbar-nav.navbar-right
-            - if user_signed_in?
-              = link_to 'Sign out', destroy_user_session_path, :method => :delete, :class=>"btn btn-li btn-danger"
-            - else
-              = link_to 'Sign in', new_user_session_path, :class=>"btn btn-li btn-success"
+            #button_sign
+              - if user_signed_in?
+                = link_to 'Sign out', destroy_user_session_path, :method => :delete, :class=>"btn btn-li btn-danger"
+              - else
+                = link_to 'Sign in', new_user_session_path, :class=>"btn btn-li btn-success"
       .container
         = yield
         #push
@@ -55,3 +59,10 @@
     #footer
       .navbar.navbar-default
         %p.muted.credit &copy; 2013 BizonApps. All rights reserved.
+- if user_signed_in?
+  :javascript
+    avatar = '#{image_tag current_user.avatar.url(:small)}';
+    nickname = '#{current_user.nickname}';
+    user_id = '#{current_user.id}';
+    cur_time = '#{l Time.now, format: :my}';
+    root_url = '#{root_url}';

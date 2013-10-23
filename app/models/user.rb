@@ -15,6 +15,7 @@ class User
     :styles => {
       :original => ['1920x1680>', :jpg],
       :small    => ['65x65#',   :jpg],
+      :mega_small    => ['40x40#',   :jpg],
       :medium   => ['250x250',    :jpg],
       :large    => ['500x500>',   :jpg]
     }, :convert_options => { :all => '-background white -flatten +matte' }

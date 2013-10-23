@@ -12,16 +12,22 @@
                   - if message.user_to == user or message.user_from == user
                     - i=1
                     - partner = message.user_to == user ?  message.to_user : message.from_user
-                    %tr
-                      %td
+                    %tr.mess{'href' => "/messages/#{partner.id}"}
+                      %td.avat
                         #img
                           = image_tag partner.avatar.url(:small)
-                      %td
+                      %td.nickdate
                         #nickname
                           = link_to "#{partner.nickname}", page_path(partner)
                         #date
                           = l message.created_at, format: :my
-                      %td.mess{'href' => "/messages/#{partner.id}"}
+                      %td#usr_ava_from
+                        = image_tag message.from_user.avatar.url(:mega_small)
+                      %td
                         #text
-                          = message.message
+                          - if !message.is_read
+                            #is_read
+                              = message.message
+                          - else
+                            = message.message
                   - break if i==1
