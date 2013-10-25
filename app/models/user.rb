@@ -22,6 +22,21 @@ class User
 
   validates :email, presence: true
   validates :description, length: { maximum: 3500 }
+  validate :nickname_validations
+
+  def nickname_validations
+    errors.add(:nickname, 'can\'t be empty') if self.nickname.blank?
+    errors.add(:nickname, 'can\'t contain less than 3 symbols') if self.nickname.size < 3
+    nickname = self.nickname.split
+    #puts 'XXX' + YAML::dump(nickname)
+    errors.add(:nickname, 'can\'t contain more than 2 words') if nickname.size > 2
+    if nickname.size == 2
+      errors.add(:nickname, '1 part can\'t contain more than 12 symbols') if nickname[0].size > 12
+      errors.add(:nickname, '2 part can\'t contain more than 12 symbols') if nickname[1].size > 12
+    elsif nickname.size == 1
+      errors.add(:nickname, 'can\'t contain more than 12 symbols') if nickname[0].size > 12
+    end
+  end
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""

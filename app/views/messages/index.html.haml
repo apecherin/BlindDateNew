@@ -3,7 +3,6 @@
     .col-lg-offset-1.col-lg-10
       .well
         #messages
-          = link_to 'New', new_message_path
           %table.table
             %tbody
               - @usrs_between.each do |user|

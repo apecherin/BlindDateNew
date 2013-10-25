@@ -2,6 +2,11 @@
   .row
     .col-lg-12
       .well
+        .col-lg-2#user{'href' => "/pages/#{@partner.id}"}
+          = image_tag @partner.avatar.url(:small)
+          = @partner.nickname
+        .col-lg-2#bldate
+          = link_to "встретиться", page_path(@partner), :class => "btn btn-warning btn-xs"
         .chat_container
           .well
             #chat_room_private
@@ -24,7 +29,7 @@
             = link_to 'Назад', messages_path, :class => "btn btn-primary btn-xs"
           %form#new_message_form_private.form-inline{role: "form"}
             .col-lg-6
-              %input#user_to{:type => "hidden", :value => @partner_id}
+              %input#user_to{:type => "hidden", :value => @partner.id}
               %input#user_from{:type => "hidden", :value => current_user.id}
               %textarea#message.form-control{placeholder: "Твое сообщение",rows: "4"}
             %br/

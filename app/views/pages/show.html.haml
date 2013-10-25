@@ -10,9 +10,11 @@
               .col-md-3
                 %h2 #{@user.nickname}
                 %h3
-                  = link_to "написать", messages_path, :class => "btn btn-warning btn-xs"
+                  %a{'href' => "/messages/#{@user.id}", :class => "btn btn-warning btn-xs"}
+                    написать
                 %h3
-                  = link_to "встретиться", messages_path, :class => "btn btn-warning btn-xs"
+                  %a{'href' => "/messages/#{@user.id}", :class => "btn btn-warning btn-xs"}
+                    встретиться
               .col-md-3
                 %h4 Пол:
                 %h3 #{@user.sex}

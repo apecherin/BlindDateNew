@@ -24,10 +24,10 @@ class MessagesController < ApplicationController
     @messages.each do |message|
       message.update_attributes(is_read: true) if !message.is_read && message.user_to == current_user.id
     end
-    @partner_id = params[:id]
+    @partner = User.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => { :messages=> @messages, :partner_id => @partner_id } }
+      format.json { render :json => { :messages=> @messages, :partner_id => @partner } }
     end
   end
 

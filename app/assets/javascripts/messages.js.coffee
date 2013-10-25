@@ -32,6 +32,8 @@ dialog2 =
   modalInit: ->
     $('#messages .mess').click ->
       window.location = $(this).attr("href")
+    $('.well #user').click ->
+      window.location = $(this).attr("href")
 
 chat_private =
   init: ->
