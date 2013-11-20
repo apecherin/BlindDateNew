@@ -28,20 +28,6 @@ gem 'devise'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
-gem 'faye'
+gem 'faye', '0.8.9'
 gem 'thin'
 gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
-          # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

@@ -18,7 +18,7 @@
                         %td.avat
                           #img
                             = image_tag message.from_user.avatar.url(:small)
-                        %td
+                        %td.nickdate
                           #nickname
                             = link_to "#{message.from_user.nickname}", page_path(message.from_user)
                           #date

@@ -5,6 +5,7 @@ messages =
     @readMess()
 
   countMess: ->
+    console.log "ttt"
     $.ajax
       url: "/messages/countMessage"
       type: "POST"
@@ -105,7 +106,7 @@ chat =
   fayePubInit: ->
     public_subscription = client.subscribe("/messages/public", (data) ->
       p = $("<p></p>")
-      result = p.html(data.nick_date + ": " + data.mess)
+      result = p.html(data.date + " <a href='/pages/" + data.nick_id +"'>"+ data.nick +"</a>" + ": " + data.mess)
       #push to our win
       result.appendTo "#chat_room"
       chat.updateScroll 300
@@ -126,7 +127,9 @@ chat =
     if message
       #push message to patners
       client.publish "/messages/public",
-        nick_date: cur_time + " " + nickname
+        nick: nickname,
+        nick_id: nickname_id,
+        date: cur_time,
         mess: message
       $("#message").val ""
       chat.updateScroll 300

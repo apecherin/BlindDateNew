@@ -11,11 +11,12 @@
                 %h2 #{current_user.nickname}
                 %h3
                   = link_to "Почта", messages_path, :class => "btn btn-warning btn-xs", :id => "messages_link_main"
-                %h3 Встречи
+                %h3
+                  = link_to "Встречи", messages_path, :class => "btn btn-warning btn-xs", :id => "messages_link_main"
               .col-md-3
                 %h4 Пол:
                 %h3 #{current_user.sex}
-                %br/
+                %br
                 %h4 Возраст:
                 %h3 #{current_user.age}
               .col-md-4

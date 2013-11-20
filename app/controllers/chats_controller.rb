@@ -3,6 +3,5 @@ class ChatsController < ApplicationController
   def room
   end
   def index
-
   end
 end
