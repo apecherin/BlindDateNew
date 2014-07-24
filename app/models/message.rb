@@ -7,7 +7,7 @@ class Message
     attrs["id"] = attrs["_id"]
     attrs
   end
-  # Setup accessible (or protected) attributes for your model
+
   attr_accessible :message, :user_from, :user_to, :image, :is_read
 
   has_mongoid_attached_file :image,

@@ -1,9 +1,7 @@
 class MessagesController < ApplicationController
   before_filter :authenticate_user!
   def index
-    #get all messages for current user
     @messages = Message.or({user_to: current_user.id}, {user_from: current_user.id}).order_by(:created_at => :desc)
-    #get all users in messages
     @usrs_between = [] #group by user
     @messages.each do |message|
       @usrs_between << message.user_from
@@ -20,7 +18,6 @@ class MessagesController < ApplicationController
 
   def show
     @messages = Message.or({user_to: params[:id], user_from: current_user.id}).or({user_to: current_user.id, user_from: params[:id]}).order_by
-    #user will read all mess from this partner
     @messages.each do |message|
       message.update_attributes(is_read: true) if !message.is_read && message.user_to == current_user.id
     end

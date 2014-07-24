@@ -5,7 +5,6 @@ messages =
     @readMess()
 
   countMess: ->
-    console.log "ttt"
     $.ajax
       url: "/messages/countMessage"
       type: "POST"
@@ -31,9 +30,7 @@ dialog2 =
     @modalInit()
 
   modalInit: ->
-    $('#messages .mess').click ->
-      window.location = $(this).attr("href")
-    $('.well #user').click ->
+    $('#messages .mess, .well #user').click ->
       window.location = $(this).attr("href")
 
 chat_private =

@@ -1,12 +1,10 @@
 class User
   include Mongoid::Document
   include Mongoid::Paperclip
-  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :nickname, :current_password, :password,
                   :password_confirmation, :remember_me, :avatar,
                   :age, :sex, :description
@@ -28,7 +26,6 @@ class User
     errors.add(:nickname, 'can\'t be empty') if self.nickname.blank?
     errors.add(:nickname, 'can\'t contain less than 3 symbols') if self.nickname.size < 3
     nickname = self.nickname.split
-    #puts 'XXX' + YAML::dump(nickname)
     errors.add(:nickname, 'can\'t contain more than 2 words') if nickname.size > 2
     if nickname.size == 2
       errors.add(:nickname, '1 part can\'t contain more than 12 symbols') if nickname[0].size > 12

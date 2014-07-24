@@ -16,7 +16,6 @@
 //= require twitter/bootstrap
 //= require underscore
 //= require messages
-//= require pages
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
