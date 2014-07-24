@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Product.create("age" => "20",
+User.create("age" => "20",
     "avatar" => "",
     "avatar_content_type" => "image/jpeg",
     "avatar_file_name" => "images.jpeg",
