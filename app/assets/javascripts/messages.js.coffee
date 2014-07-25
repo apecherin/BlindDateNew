@@ -103,7 +103,8 @@ chat =
   fayePubInit: ->
     public_subscription = client.subscribe("/messages/public", (data) ->
       p = $("<p></p>")
-      result = p.html(data.date + " <a href='/pages/" + data.nick_id +"'>"+ data.nick +"</a>" + ": " + data.mess)
+      console.log data
+      result = p.html(data.date + " <a href='/pages/" + data.nick_id + "'>" + data.nick + "</a>" + ": " + data.mess)
       #push to our win
       result.appendTo "#chat_room"
       chat.updateScroll 300

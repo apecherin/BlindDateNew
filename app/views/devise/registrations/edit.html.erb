@@ -4,7 +4,7 @@
       <div class="well">
         <h2>Профиль <%= current_user.nickname %> <%= link_to "Удалить мой профиль", registration_path(resource_name), :class => "btn btn-danger btn-xs", :data => { :confirm => "Are you sure?" }, :method => :delete %></h2>
         <br>
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal", :role => "form", :multipart => true }) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal", role: "form", multipart: true, autocomplete: "off" }) do |f| %>
           <%= devise_error_messages! %>
 
           <div class="form-group">
@@ -53,7 +53,7 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">Возраст</label>
             <div class="col-lg-8" id="profile">
-              <%= f.text_field :age, :placeholder => "Полных лет", :class=>"form-control"%>
+              <%= f.text_field :age, :placeholder => "Полных лет", :class=>"form-control", :autocomplete => :off%>
             </div>
           </div>
 
