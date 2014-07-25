@@ -8,8 +8,6 @@ class Message
     attrs
   end
 
-  attr_accessible :message, :user_from, :user_to, :image, :is_read
-
   has_mongoid_attached_file :image,
                             :styles => {
                                 :small    => ['65x65#',   :jpg],
@@ -18,6 +16,7 @@ class Message
 
   validates :message, presence: true
   validates :user_to, presence: true
+  validates_attachment :image, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   field :message,   :type => String, :default => ""
   field :user_from, :type => String, :default => 0

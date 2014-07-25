@@ -16,7 +16,3 @@
 //= require twitter/bootstrap
 //= require underscore
 //= require messages
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone/blind_date_new

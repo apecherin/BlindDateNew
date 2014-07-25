@@ -5,11 +5,16 @@ class PagesController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(post_params[:id])
 
     respond_to do |format|
       format.html
       format.json { render json: @user }
     end
+  end
+
+private
+  def post_params
+    parameters = params.permit(:id)
   end
 end

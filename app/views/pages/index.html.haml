@@ -15,7 +15,7 @@
                   = link_to "Встречи", messages_path, :class => "btn btn-warning btn-xs", :id => "messages_link_main"
               .col-md-3
                 %h4 Пол:
-                %h3 #{current_user.sex}
+                %h3 #{current_user.sex == 0 ? "мужской" : "женский"}
                 %br
                 %h4 Возраст:
                 %h3 #{current_user.age}

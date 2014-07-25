@@ -2,7 +2,7 @@
   .row
     .col-lg-12
       .well
-        .row
+        .row.user-info
           .col-md-3
             = image_tag @user.avatar.url(:medium)
           .col-md-9
@@ -17,7 +17,7 @@
                     встретиться
               .col-md-3
                 %h4 Пол:
-                %h3 #{@user.sex}
+                %h3 #{@user.sex == 0 ? "мужской" : "женский"}
                 %br/
                 %h4 Возраст:
                 %h3 #{@user.age}
